@@ -1,0 +1,18 @@
+@startuml blogging-context
+title Blogging Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(author,"Author")
+System(blog,"Acme Blog")
+
+Rel(author,blog,"Create Post")
+Rel(author,blog,"Update Post","https")
+
+Person_Ext(reader,"Reader")
+Rel(reader,blog,"Read Post","https")
+Rel(reader,blog,"Search Post","https")
+Rel(reader,blog,"Notify New Post","email")
+
+
+@enduml
