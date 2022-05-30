@@ -1,0 +1,14 @@
+@startuml create-post-diagram
+
+actor User
+
+PostResource->PostService :create post
+alt success
+  PostResource<-PostService :success
+  User<-PostResource :success
+else failure
+   PostResource<-PostService :failure
+  User<-PostResource :failure
+end
+
+@enduml

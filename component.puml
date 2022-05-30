@@ -1,8 +1,27 @@
 @startuml blogging-container
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
+Container(admin,"Admin Panel","reactjs")
+ContainerDb(eventBus,"Event bus","kafka")
+
 Container_Boundary(blogService,"Blog Service"){
-  
+  Component(postResource,"Post Resource","jax-rs")
+  Rel(admin,postResource,"Create Post")
+
+  Component(postService,"Post Service","java")
+  Rel(postResource,postService,"Create Post")
+
+  Component(postDao,"Post Dao","jdbi")
+  Rel(postService,postDao,"Create Post") 
+
+  ComponentDb(blogPostDb,"Blog Post DB","MySQL DB")
+  Rel(postDao,blogPostDb,"Insert Row in Post")
+
+  Component(messageClient,"Message Client","java")
+  Rel(postService,messageClient,"Post created")
+
+  Rel(messageClient,eventBus,"Post Created Event","kafka")
+
 }
 
 
