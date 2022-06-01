@@ -1,5 +1,8 @@
-@startuml blogging-container
+@startuml blogging-component
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
 
 Container(admin,"Admin Panel","reactjs")
 ContainerDb(eventBus,"Event bus","kafka")
@@ -22,7 +25,6 @@ Container_Boundary(blogService,"Blog Service"){
 
   Rel(messageClient,eventBus,"Post Created Event","kafka")
 
-}
-
+} 
 
 @enduml
